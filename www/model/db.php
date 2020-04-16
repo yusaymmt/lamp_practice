@@ -19,8 +19,7 @@ function get_db_connect(){
 function fetch_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
-    $statement->bindParam (':params',$params);
-    $statement->execute($params);
+    $statement->execute(':params' => $params);
     return $statement->fetch();
   }catch(PDOException $e){
     set_error('データ取得に失敗しました。');
@@ -31,8 +30,7 @@ function fetch_query($db, $sql, $params = array()){
 function fetch_all_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
-    $statement->bindParam (':params',$params);
-    $statement->execute($params);
+    $statement->execute(':params' => $params);
     return $statement->fetchAll();
   }catch(PDOException $e){
     set_error('データ取得に失敗しました。');
@@ -43,8 +41,7 @@ function fetch_all_query($db, $sql, $params = array()){
 function execute_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
-    $statement->bindParam (':params',$params);
-    return $statement->execute($params);
+    return $statement->execute(':params' => $params);
   }catch(PDOException $e){
     set_error('更新に失敗しました。');
   }
