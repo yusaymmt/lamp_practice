@@ -15,11 +15,16 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
-
-if(delete_cart($db, $cart_id)){
-  set_message('カートを削除しました。');
+$token = get_post('token');
+if (is_valid_csrf_token($token) === false) {
+  set_error('不正な動作が確認されました');
 } else {
-  set_error('カートの削除に失敗しました。');
+
+  if(delete_cart($db, $cart_id)){
+    set_message('カートを削除しました。');
+  } else {
+    set_error('カートの削除に失敗しました。');
+  }
 }
 
 redirect_to(CART_URL);
