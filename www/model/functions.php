@@ -138,3 +138,36 @@ function is_valid_upload_image($image){
 function h($str) {
   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
+
+// トークンの生成
+function get_csrf_token(){
+  // get_random_string()はユーザー定義関数。
+  $token = get_random_string(30);
+  // set_session()はユーザー定義関数。
+  set_session('csrf_token', $token);
+  return $token;
+}
+
+// トークンのチェック
+function is_valid_csrf_token($token){
+  if($token === '') {
+    return false;
+  }
+  // get_session()はユーザー定義関数
+  return $token === get_session('csrf_token');
+}
+
+function get_random_string($token) {
+    return openssl_random_pseudo_bytes($token);
+}
+
+function get_session($token) {
+  if (isset($_SESSION[$token]) === true {
+    return $_SESSION[$token];
+  }
+  return '';
+}
+
+function set_session($token, $value){
+  $_SESSION[$token] = $value;
+}
