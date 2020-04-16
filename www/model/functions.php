@@ -156,18 +156,3 @@ function is_valid_csrf_token($token){
   // get_session()はユーザー定義関数
   return $token === get_session('csrf_token');
 }
-
-function get_random_string($token) {
-    return openssl_random_pseudo_bytes($token);
-}
-
-function get_session($token) {
-  if (isset($_SESSION[$token]) === true ) {
-    return $_SESSION[$token];
-  }
-  return '';
-}
-
-function set_session($token, $value){
-  $_SESSION[$token] = $value;
-}
