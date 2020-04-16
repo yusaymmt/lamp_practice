@@ -162,7 +162,7 @@ function get_random_string($token) {
 }
 
 function get_session($token) {
-  if (isset($_SESSION[$token]) === true {
+  if (isset($_SESSION[$token]) === true ) {
     return $_SESSION[$token];
   }
   return '';
