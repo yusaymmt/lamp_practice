@@ -20,6 +20,16 @@ $token = get_post('token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {
+<<<<<<< HEAD
+=======
+
+  if(add_cart($db,$user['user_id'], $item_id)){
+    set_message('カートに商品を追加しました。');
+  } else {
+    set_error('カートの更新に失敗しました。');
+  }
+}
+>>>>>>> develop
 
   if(add_cart($db,$user['user_id'], $item_id)){
     set_message('カートに商品を追加しました。');

@@ -31,6 +31,14 @@ if (is_valid_csrf_token($token) === false) {
     set_error('商品削除に失敗しました。');
   }
 
+<<<<<<< HEAD
+=======
+  if(destroy_item($db, $item_id) === true){
+    set_message('商品を削除しました。');
+  } else {
+    set_error('商品削除に失敗しました。');
+  }
+>>>>>>> develop
 }
 
 

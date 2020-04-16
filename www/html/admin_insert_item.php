@@ -36,6 +36,10 @@ if (is_valid_csrf_token($token) === false) {
   }else {
     set_error('商品の登録に失敗しました。');
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 }
 
 

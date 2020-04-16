@@ -30,6 +30,13 @@ if (is_valid_csrf_token($token) === false) {
   } else {
     set_error('在庫数の変更に失敗しました。');
   }
+}
+
+  if(update_item_stock($db, $item_id, $stock)){
+    set_message('在庫数を変更しました。');
+  } else {
+    set_error('在庫数の変更に失敗しました。');
+  }
 
   redirect_to(ADMIN_URL);
 }

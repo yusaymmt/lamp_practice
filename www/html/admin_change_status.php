@@ -35,5 +35,4 @@ if (is_valid_csrf_token($token) === false) {
     set_error('不正なリクエストです。');
   }
 
-}
 redirect_to(ADMIN_URL);
