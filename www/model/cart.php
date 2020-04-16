@@ -3,6 +3,7 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
 function get_user_carts($db, $user_id){
+
   $sql = "
     SELECT
       items.item_id,
@@ -23,7 +24,7 @@ function get_user_carts($db, $user_id){
     WHERE
       carts.user_id = :user_id
   ";
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql, array('user_id' => $user_id));
 }
 
 function get_user_cart($db, $user_id, $item_id){
@@ -50,7 +51,7 @@ function get_user_cart($db, $user_id, $item_id){
       items.item_id = :item_id
   ";
 
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql, array('user_id' => '$user_id', 'item_id' => $item_id));
 
 }
 
@@ -73,7 +74,7 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
     VALUES(:item_id, :user_id, :amount)
   ";
 
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array('item_id' => '$item_id', 'user_id' => $user_id, 'amount' => $amount));
 }
 
 function update_cart_amount($db, $cart_id, $amount){
@@ -86,7 +87,7 @@ function update_cart_amount($db, $cart_id, $amount){
       cart_id = :cart_id
     LIMIT 1
   ";
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,array('amount' => $amount,'cart_id' => $cart_id));
 }
 
 function delete_cart($db, $cart_id){
@@ -98,7 +99,7 @@ function delete_cart($db, $cart_id){
     LIMIT 1
   ";
 
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array('cart_id' => $cart_id));
 }
 
 function purchase_carts($db, $carts){
@@ -126,7 +127,7 @@ function delete_user_carts($db, $user_id){
       user_id = :user_id
   ";
 
-  execute_query($db, $sql);
+  execute_query($db, $sql, array('user_id' => $user_id));
 }
 
 
