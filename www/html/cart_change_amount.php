@@ -16,7 +16,8 @@ $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
 $amount = get_post('amount');
-$token = get_post('token');
+
+$token = get_post('cart_token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {
@@ -26,6 +27,6 @@ if (is_valid_csrf_token($token) === false) {
   } else {
     set_error('購入数の更新に失敗しました。');
   }
-}
 
-redirect_to(CART_URL);
+  redirect_to(CART_URL);
+}
