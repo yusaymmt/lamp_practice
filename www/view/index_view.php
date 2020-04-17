@@ -12,7 +12,6 @@
 
   <div class="container">
     <h1>商品一覧</h1>
-    <?php var_dump($token); ?>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <div class="card-deck">
@@ -31,7 +30,7 @@
                   <form action="index_add_cart.php" method="post">
                     <input type="submit" value="カートに追加" class="btn btn-primary btn-block">
                     <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
-                    <input type="hidden" name="token" value="<?php print $token; ?>">
+                    <input type="hidden" name="index_token" value="<?php print $token; ?>">
                   </form>
                 <?php } else { ?>
                   <p class="text-danger">現在売り切れです。</p>

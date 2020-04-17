@@ -15,7 +15,8 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
-$token = get_post('token');
+
+$token = get_post('cart_token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {

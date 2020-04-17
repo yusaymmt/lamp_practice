@@ -14,8 +14,7 @@ if(is_logined() === false){
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$token = get_session('csrf_token');
-var_dump($token);
+$token = get_csrf_token();
 
 $carts = get_user_carts($db, $user['user_id']);
 

@@ -27,7 +27,7 @@ $stock = get_post('stock');
 
 $image = get_file('image');
 
-$token = get_post('token');
+$token = get_post('admin_token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {

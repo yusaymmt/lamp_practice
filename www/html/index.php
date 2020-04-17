@@ -10,11 +10,11 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+$token = get_csrf_token();
+
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$token = get_session('csrf_token');
-var_dump($token);
 $items = get_open_items($db);
 
 include_once VIEW_PATH . 'index_view.php';
