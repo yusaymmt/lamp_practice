@@ -17,20 +17,14 @@ $user = get_login_user($db);
 if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
-$token = get_csrf_token();
+
 $item_id = get_post('item_id');
 $stock = get_post('stock');
 $token = get_post('token');
+
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {
-
-  if(update_item_stock($db, $item_id, $stock)){
-    set_message('在庫数を変更しました。');
-  } else {
-    set_error('在庫数の変更に失敗しました。');
-  }
-}
 
   if(update_item_stock($db, $item_id, $stock)){
     set_message('在庫数を変更しました。');

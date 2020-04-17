@@ -12,6 +12,7 @@
 
   <div class="container">
     <h1>商品一覧</h1>
+    <?php var_dump($token); ?>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <div class="card-deck">

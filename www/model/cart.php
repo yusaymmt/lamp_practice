@@ -51,7 +51,7 @@ function get_user_cart($db, $user_id, $item_id){
       items.item_id = :item_id
   ";
 
-  return fetch_query($db, $sql, array('user_id' => '$user_id', 'item_id' => $item_id));
+  return fetch_query($db, $sql, array('user_id' => $user_id, 'item_id' => $item_id));
 
 }
 
@@ -74,7 +74,7 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
     VALUES(:item_id, :user_id, :amount)
   ";
 
-  return execute_query($db, $sql, array('item_id' => '$item_id', 'user_id' => $user_id, 'amount' => $amount));
+  return execute_query($db, $sql, array('item_id' => $item_id, 'user_id' => $user_id, 'amount' => $amount));
 }
 
 function update_cart_amount($db, $cart_id, $amount){

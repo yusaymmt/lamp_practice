@@ -14,27 +14,22 @@ if(is_logined() === false){
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$token = get_csrf_token();
+
 $item_id = get_post('item_id');
 $token = get_post('token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {
-<<<<<<< HEAD
-=======
 
   if(add_cart($db,$user['user_id'], $item_id)){
     set_message('カートに商品を追加しました。');
   } else {
     set_error('カートの更新に失敗しました。');
   }
-}
->>>>>>> develop
 
-  if(add_cart($db,$user['user_id'], $item_id)){
-    set_message('カートに商品を追加しました。');
-  } else {
-    set_error('カートの更新に失敗しました。');
-  }
+  redirect_to(HOME_URL);
+
 }
-redirect_to(HOME_URL);
+
+
+

@@ -45,11 +45,7 @@
       </div>
       
       <input type="submit" value="商品追加" class="btn btn-primary">
-<<<<<<< HEAD
-      <input type="hidden" name="token" value="<?php get_csrf_token($token); ?>">
-=======
-      <input type="hidden" name="token" value="<?php print $token; ?>">
->>>>>>> develop
+      <input type="hidden" name="token" value="<?php $token; ?>">
     </form>
 
 

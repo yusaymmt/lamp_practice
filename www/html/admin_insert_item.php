@@ -18,7 +18,8 @@ if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
 
-$token = get_csrf_token();
+
+
 $name = get_post('name');
 $price = get_post('price');
 $status = get_post('status');
@@ -36,11 +37,6 @@ if (is_valid_csrf_token($token) === false) {
   }else {
     set_error('商品の登録に失敗しました。');
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
+  redirect_to(ADMIN_URL);
 }
-
-
-redirect_to(ADMIN_URL);
