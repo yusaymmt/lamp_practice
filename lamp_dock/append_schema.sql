@@ -4,6 +4,7 @@ user_id INT,
 item_id INT,
 amount INT,
 total INT,
-create_datetime DATETIME,
+created DATETIME,
+updated DATETIME,
 primary key(history_id)
 );
