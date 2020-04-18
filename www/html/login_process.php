@@ -12,7 +12,7 @@ if(is_logined() === true){
 $name = get_post('name');
 $password = get_post('password');
 
-$token = get_post('login_token');
+$token = get_post('token');
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {
