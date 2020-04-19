@@ -28,5 +28,5 @@ if (is_valid_csrf_token($token) === false) {
     set_error('購入数の更新に失敗しました。');
   }
 
-  redirect_to(CART_URL);
 }
+redirect_to(CART_URL);
