@@ -159,13 +159,13 @@ function validate_cart_purchase($carts){
 }
 
 //購入を確定すると同時に購入履歴を保存する
-function confirm_purchase($db, $carts, $user_id, $history_id, $item_id, $price, $amount) {
+function confirm_purchase($db, $carts, $user_id) {
   try {
     $db->beginTransaction();
     //購入を進め、在庫を減らし、カート削除
     purchase_carts($db, $carts);
     //購入履歴を保存する
-    register_history($db, $carts, $user_id, $history_id, $item_id, $price, $amount);
+    register_history($db, $carts, $user_id);
     //コミットする
     $db->commit();
     return true;
@@ -176,7 +176,7 @@ function confirm_purchase($db, $carts, $user_id, $history_id, $item_id, $price, 
   }
 }
 //購入履歴をDBに保存する
-function register_history ($db, $carts, $user_id, $history_id, $item_id, $price, $amount) {
+function register_history ($db, $carts, $user_id) {
   $history_id = insert_history($db, $user_id);
     foreach ($carts as $key => $rec) {
       $item_id = (int)$rec['item_id'];
