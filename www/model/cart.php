@@ -159,41 +159,42 @@ function validate_cart_purchase($carts){
 }
 
 //購入を確定すると同時に購入履歴を保存する
-function resist_history ($db, $carts, $user_id, $item_id, $price, $amount) {
-  $history_id = '';
+function confirm_purchase($db, $carts, $user_id, $history_id, $item_id, $price, $amount) {
   try {
     $db->beginTransaction();
-      //商品状況を確認し購入を進め、カート削除・在庫を減らす
-      purchase_carts($db, $carts);
-      //購入履歴テーブルに保存
-      $user_id = $carts[0]['user_id'];
-      insert_history($db, $user_id);
-      //history_idを取得し、購入詳細保存
-      $history_id = $db->lastInsertId();
-      foreach ($carts as $key => $rec) {
-        $item_id = (int)$rec['item_id'];
-        $price = (int)$rec['price'];
-        $amount = (int)$rec['amount'];
-
-        insert_history_detail($db, $history_id, $item_id, $price, $amount);
-      }
-      $db->commit();
-      return true;
-      } catch (PDOException $e) { 
-          throw $e;
-          $db->rollback();
-          return false;
-      }
+    //購入を進め、在庫を減らし、カート削除
+    purchase_carts($db, $carts);
+    //購入履歴を保存する
+    register_history($db, $carts, $user_id, $history_id, $item_id, $price, $amount);
+    //コミットする
+    $db->commit();
+    return true;
+  } catch (PDOException $e) { 
+      throw $e;
+      $db->rollback();
+      return false;
+  }
+}
+//購入履歴をDBに保存する
+function register_history ($db, $carts, $user_id, $history_id, $item_id, $price, $amount) {
+  $history_id = insert_history($db, $user_id);
+    foreach ($carts as $key => $rec) {
+      $item_id = (int)$rec['item_id'];
+      $price = (int)$rec['price'];
+      $amount = (int)$rec['amount'];
+      insert_history_detail($db, $history_id, $item_id, $price, $amount);
+    }
 }
 
-//購入履歴テーブルに保存
+
+//hisotryテーブルに保存
 function insert_history($db, $user_id) {
   $sql = "INSERT INTO history (user_id) VALUES (:user_id)";
   execute_query($db, $sql, array('user_id' => $user_id));
-  return history_id;
+  return $db->lastInsertId();
 }
 
-//購入詳細テーブルに保存
+//hisotry_detailテーブルに保存
 function insert_history_detail($db, $history_id, $item_id, $price, $amount) {
   $sql = "INSERT INTO history_detail (history_id, item_id, price, amount)
           VALUES (:history_id, :item_id, :price, :amount)";
