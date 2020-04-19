@@ -6,12 +6,12 @@ updated DATETIME,
 primary key(history_id)
 );
 
-CREATE history_detail (
+CREATE TABLE history_detail (
 detail_id INT AUTO_INCREMENT,
-hisotry_id INT,
+history_id INT,
 item_id INT,
+price INT,
 amount INT,
-subtotal INT,
 created DATETIME,
 updated DATETIME,
 primary key(detail_id)
