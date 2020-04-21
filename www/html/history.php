@@ -17,12 +17,13 @@ $user = get_login_user($db);
 
 $token = get_csrf_token();
 
-//同じユーザIDを持つhisotry_idを取得する
-$history = get_history($db, $user['user_id']);
+//同じユーザIDを持つ購入履歴を取得する
+$history = history_data($db, $user['user_id']);
 
 //管理者だった場合
 if ($user['type'] === USER_TYPE_ADMIN){
     $history = get_all_history($db);
 }
+
 
 include_once VIEW_PATH . 'history_view.php';

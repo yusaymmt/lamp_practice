@@ -27,7 +27,7 @@
           <tr>
             <td><?php print $data['history_id']; ?></td>
             <td><?php print $data['created']; ?></td>
-            <td><?php print(number_format($data['price'] * $data['amount'])); ?>円</td>
+            <td><?php print(number_format($data['total'])); ?>円</td>
             <td>
               <form method="post" action="history_detail.php">
                 <input type="submit" value="購入明細表示" class="btn btn-secondary">

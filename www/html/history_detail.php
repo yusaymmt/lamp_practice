@@ -23,6 +23,6 @@ $history_id = get_post('history_id');
 $detail = get_history_data($db, $history_id);
 $created = $detail[0]['created'];
 
-$total = sum_history($db,$history_id);
+$total = sum_total($db,$history_id);
 
 include_once VIEW_PATH . 'history_detail_view.php';

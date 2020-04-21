@@ -25,7 +25,7 @@
           <tr>
             <td><?php print $history_id; ?></td>
             <td><?php print $created; ?></td>
-            <td><?php print(number_format($total['SUM(price * amount)'])); ?>円</td>
+            <td><?php print(number_format($total['subtotal'])); ?>円</td>
           </tr>
         </tbody>
       </table>
