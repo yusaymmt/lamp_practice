@@ -25,7 +25,7 @@
           <tr>
             <td><?php print $history_id; ?></td>
             <td><?php print $created; ?></td>
-            <td><?php print(number_format($price * $amount)); ?>円</td>
+            <td><?php print(number_format($total['SUM(price * amount)'])); ?>円</td>
           </tr>
         </tbody>
       </table>
@@ -40,12 +40,14 @@
           </tr>
         </thead>
         <tbody>
+        <?php foreach($detail as $value){ ?>
           <tr>
-            <td><?php print h($name); ?></td>
-            <td><?php print number_format($price); ?>円</td>
-            <td><?php print $amount; ?>個</td>
-            <td><?php print number_format($price * $amount); ?>円</td>
+            <td><?php print h($value['name']); ?></td>
+            <td><?php print number_format($value['price']); ?>円</td>
+            <td><?php print $value['amount']; ?>個</td>
+            <td><?php print number_format($value['price'] * $value['amount']); ?>円</td>
           </tr>
+        <?php } ?>
         </tbody>
       </table>
 

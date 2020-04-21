@@ -31,7 +31,6 @@
             <td>
               <form method="post" action="history_detail.php">
                 <input type="submit" value="購入明細表示" class="btn btn-secondary">
-                <input type="hidden" name="item_id" value="<?php print($data['item_id']); ?>">
                 <input type="hidden" name="history_id" value="<?php print($data['history_id']); ?>">
                 <input type="hidden" name="token" value="<?php print $token; ?>">
               </form>

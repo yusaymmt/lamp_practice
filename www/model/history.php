@@ -34,32 +34,27 @@ function get_all_history($db) {
 
 }
 
-//２つのテーブルから必要情報を一気に取得する…上手くいかない
-// function get_history_data($db, $item_id, $history_id) {
-//     $sql = "SELECT history_detail.created,
-//                     history_detail.amount,
-//                     history_detail.price,
-//                     items.name
-//             FROM history_detail
-//             JOIN items
-//             ON history_detail.item_id = items.item_id
-//             WHERE item_id = :item_id AND history_id = :history_id
-//     ";
-//     return fetch_all_query($db, $sql, array('item_id' => $item_id, 'history_id' => $history_id)); 
-// }
-
-function get_history_data($db, $item_id, $history_id) {
-    $sql = "SELECT price,amount,created
+//２つのテーブルから必要情報を一気に取得する
+function get_history_data($db, $history_id) {
+    $sql = "SELECT history_detail.created,
+                    history_detail.amount,
+                    history_detail.price,
+                    items.name
             FROM history_detail
-            WHERE item_id = :item_id AND history_id = :history_id
+            JOIN items
+            ON history_detail.item_id = items.item_id
+            WHERE history_id = :history_id
     ";
-    return fetch_all_query($db, $sql, array('item_id' => $item_id, 'history_id' => $history_id)); 
+    return fetch_all_query($db, $sql, array( 'history_id' => $history_id)); 
 }
 
-function get_history_name($db,$item_id) {
-    $sql = "SELECT name FROM items WHERE item_id = :item_id";
-    return fetch_all_query($db, $sql, array('item_id' => $item_id));
-}
+function sum_history($db, $history_id) {
+  $sql = "SELECT SUM(price * amount) 
+            FROM history_detail
+            WHERE history_id = :history_id
+            GROUP BY history_id
+        ";
 
-
+return fetch_query($db, $sql, array( 'history_id' => $history_id));   
+}   
 
