@@ -1,8 +1,8 @@
 CREATE TABLE history(
 history_id INT AUTO_INCREMENT,
 user_id INT,
-created DATETIME,
-updated DATETIME,
+created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 primary key(history_id)
 );
 
@@ -12,8 +12,8 @@ history_id INT,
 item_id INT,
 price INT,
 amount INT,
-created DATETIME,
-updated DATETIME,
+created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 primary key(detail_id)
 );
 
