@@ -117,6 +117,8 @@ function purchase_carts($db, $carts){
   }
   
   delete_user_carts($db, $carts[0]['user_id']);
+
+  return true;
 }
 
 function delete_user_carts($db, $user_id){
@@ -162,13 +164,14 @@ function validate_cart_purchase($carts){
 function confirm_purchase($db, $carts, $user_id) {
   try {
     $db->beginTransaction();
-    //購入を進め、在庫を減らし、カート削除
-    purchase_carts($db, $carts);
-    //購入履歴を保存する
-    register_history($db, $carts, $user_id);
-    //コミットする
-    $db->commit();
-    return true;
+    //購入を進め、在庫を減らし、カート削除に成功すれば
+    if(purchase_carts($db, $carts) === true){
+      //購入履歴を保存する
+      register_history($db, $carts, $user_id);
+      //コミットする
+      $db->commit();
+      return true;
+    }
   } catch (PDOException $e) { 
       throw $e;
       $db->rollback();
@@ -184,6 +187,7 @@ function register_history ($db, $carts, $user_id) {
       $amount = (int)$rec['amount'];
       insert_history_detail($db, $history_id, $item_id, $price, $amount);
     }
+    return false;
 }
 
 
