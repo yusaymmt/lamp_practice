@@ -18,8 +18,6 @@ if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
 
-
-
 $name = get_post('name');
 $price = get_post('price');
 $status = get_post('status');
@@ -28,6 +26,7 @@ $stock = get_post('stock');
 $image = get_file('image');
 
 $token = get_post('token');
+
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な動作が確認されました');
 } else {

@@ -19,6 +19,7 @@ if(is_admin($user) === false){
 }
 
 $token = get_csrf_token();
+var_dump($token);
 
 $items = get_all_items($db);
 
