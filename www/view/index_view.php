@@ -22,7 +22,7 @@
         <option value="2">価格の安い順</option>
         <option value="3">価格の高い順</option>
         </select>
-        <input type="submit" value="商品並び替え">
+        <input type="submit" value="並び替え">
       </form>
     </div>
 

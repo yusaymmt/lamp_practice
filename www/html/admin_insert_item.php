@@ -37,5 +37,5 @@ if (is_valid_csrf_token($token) === false) {
     set_error('商品の登録に失敗しました。');
   }
 
-  redirect_to(ADMIN_URL);
 }
+redirect_to(ADMIN_URL);
