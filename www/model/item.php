@@ -263,3 +263,20 @@ function sort_by_highest($db, $is_open = false) {
 function get_items_by_highest($db) {
   return sort_by_highest($db, true);
 }
+
+//並び替え
+function get_items_by($db, $sort) {
+  //sortが１の時(新着順)
+  if($sort === '1') {
+    $items = get_items_by_newest($db);
+  }
+  //sortが2の時 (価格が安い順)
+  else if($sort === '2') {
+      $items = get_items_by_lowest($db);
+  }
+  //sortが3の時（価格が高い順）
+  else if($sort === '3') {
+      $items = get_items_by_highest($db);
+  }
+  return $items;
+}
