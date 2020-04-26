@@ -12,7 +12,6 @@
 
   <div class="container">
     <h1>商品管理</h1>
-
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <form 
@@ -45,7 +44,7 @@
       </div>
       
       <input type="submit" value="商品追加" class="btn btn-primary">
-      <input type="hidden" name="token" value="<?php $token; ?>">
+      <input type="hidden" name="token" value="<?php print $token; ?>">
     </form>
 
 

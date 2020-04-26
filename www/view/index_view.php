@@ -14,6 +14,18 @@
     <h1>商品一覧</h1>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
+    <!-- ここに並び替え機能を実装する -->
+    <div class="sort">
+      <form method="GET" action="index_sort_items.php">
+        <select name="sort">
+        <option value="1" selected>新着順</option>
+        <option value="2">価格の安い順</option>
+        <option value="3">価格の高い順</option>
+        </select>
+        <input type="submit" value="並び替え">
+      </form>
+    </div>
+
     <div class="card-deck">
       <div class="row">
       <?php foreach($items as $item){ ?>
