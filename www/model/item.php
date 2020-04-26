@@ -207,76 +207,29 @@ function is_valid_item_status($status){
   return $is_valid;
 }
 
-//新着順
-function sort_by_newest($db, $is_open = false) {
+function get_items_by($db, $sort, $is_open = false) {
   $sql = 'SELECT item_id, name, stock, price, image, status
           FROM items';
           
-          if($is_open === true){
-          $sql .= '
-            WHERE status = 1
-            ORDER BY created desc
-          ';
-          }
-
-  return fetch_all_query($db, $sql);
+    if($is_open === true){
+      $sql .= '
+        WHERE status = 1
+      ';  
+      
+      if($sort === '1') {
+        $sql .= 'ORDER BY created desc
+        ';
+      } else if($sort === '2') {
+        $sql .= 'ORDER BY price asc
+        ';
+      } else if($sort === '3') {
+        $sql .= 'ORDER BY price desc
+        ';
+      }
+    }
+    return fetch_all_query($db, $sql);  
 }
 
-function get_items_by_newest($db) {
-  return sort_by_newest($db, true);
-}
-
-//価格が安い順
-function sort_by_lowest($db, $is_open = false) {
-  $sql = 'SELECT item_id, name, stock, price, image, status
-          FROM items';
-          
-          if($is_open === true){
-          $sql .= '
-            WHERE status = 1
-            ORDER BY price asc
-          ';
-          }
-
-  return fetch_all_query($db, $sql);
-}
-
-function get_items_by_lowest($db) {
-  return sort_by_lowest($db, true);
-}
-
-//価格が高い順
-function sort_by_highest($db, $is_open = false) {
-  $sql = 'SELECT item_id, name, stock, price, image, status
-          FROM items';
-          
-          if($is_open === true){
-          $sql .= '
-            WHERE status = 1
-            ORDER BY price desc
-          ';
-          }
-
-  return fetch_all_query($db, $sql);
-}
-
-function get_items_by_highest($db) {
-  return sort_by_highest($db, true);
-}
-
-//並び替え
-function get_items_by($db, $sort) {
-  //sortが１の時(新着順)
-  if($sort === '1') {
-    $items = get_items_by_newest($db);
-  }
-  //sortが2の時 (価格が安い順)
-  else if($sort === '2') {
-      $items = get_items_by_lowest($db);
-  }
-  //sortが3の時（価格が高い順）
-  else if($sort === '3') {
-      $items = get_items_by_highest($db);
-  }
-  return $items;
+function sort_items_by($db,$sort) {
+  return get_items_by($db, $sort, true);
 }

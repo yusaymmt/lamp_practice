@@ -19,6 +19,6 @@ if(isset($_GET['sort'])) {
   $sort = $_GET['sort'];
 }
 
-$items = get_items_by($db, $sort);
+$items = sort_items_by($db, $sort);
 
 include_once VIEW_PATH . 'index_view.php';
